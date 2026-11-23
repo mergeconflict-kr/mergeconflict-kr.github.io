@@ -19,7 +19,7 @@ body{display:flex;justify-content:center;padding:env(safe-area-inset-top) env(sa
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .serif{font-family:"Gowun Batang",serif}
 .hidden{display:none !important}
-#app{position:relative;width:100%;max-width:780px;min-height:100%;display:flex;flex-direction:column}
+#app{position:relative;width:100%;max-width:980px;min-height:100%;display:flex;flex-direction:column}
 
 /* ---------- 타이틀 ---------- */
 #title{position:relative;flex:1;display:flex;flex-direction:column;min-height:100vh;min-height:100dvh;overflow:hidden}
@@ -41,10 +41,12 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .tnote{margin-top:14px;font-size:11.5px;color:#8f8cb8;text-align:center;line-height:1.6}
 
 /* ---------- 게임 ---------- */
-#game{flex:1;display:flex;flex-direction:column;min-height:100vh;min-height:100dvh;background:var(--bg)}
-.stage{position:relative;width:100%;aspect-ratio:2.2/1;max-height:52vh;overflow:hidden;background:#000;flex:none}
+#game{flex:1;display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden;background:var(--bg)}
+.stage{position:relative;width:100%;aspect-ratio:1.69/1;max-height:75vh;overflow:hidden;background:#000;flex:none}
 .stage .bgl{position:absolute;inset:0;transition:background 1s}
-.stage img.cg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%;opacity:0;transition:opacity .7s ease}
+.stage img.blur{position:absolute;inset:-30px;width:calc(100% + 60px);height:calc(100% + 60px);object-fit:cover;filter:blur(22px) brightness(.55) saturate(1.2);opacity:0;transition:opacity .7s ease}
+.stage img.blur.on{opacity:1}
+.stage img.cg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:0;transition:opacity .7s ease;filter:drop-shadow(0 6px 18px #0009)}
 .stage img.cg.on{opacity:1}
 .stage .vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 40%,transparent 60%,#0008 100%)}
 .stage .pill{position:absolute;z-index:3;font-size:11.5px;padding:4px 10px;border-radius:99px;background:#000a;color:#fff;backdrop-filter:blur(4px)}
@@ -55,27 +57,27 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .toast{font-size:13px;font-weight:700;padding:5px 11px;border-radius:99px;background:#000c;animation:tin 2.2s forwards}
 @keyframes tin{0%{opacity:0;transform:translateY(8px)}12%{opacity:1;transform:none}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
 
-.dlg{position:relative;flex:1;display:flex;flex-direction:column;padding:12px 14px 8px;background:linear-gradient(180deg,#14152b,#0f1020);border-top:1px solid var(--line);min-height:250px;cursor:pointer;user-select:none;-webkit-user-select:none}
-.who{display:flex;align-items:center;gap:10px;min-height:44px;margin-bottom:6px}
-.who img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid #fff3}
-.who .nm{font-weight:700;font-size:15px;padding:3px 12px;border-radius:99px;color:#1a1030}
+.dlg{position:relative;flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;padding:9px 14px 4px;background:linear-gradient(180deg,#14152b,#0f1020);border-top:1px solid var(--line);cursor:pointer;user-select:none;-webkit-user-select:none}
+.who{display:flex;align-items:center;gap:8px;min-height:34px;margin-bottom:3px}
+.who img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid #fff3}
+.who .nm{font-weight:700;font-size:14px;padding:2px 11px;border-radius:99px;color:#1a1030}
 .who.narr{visibility:hidden}
-.txt{font-size:var(--fs);line-height:1.85;min-height:5.6em;white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere}
+.txt{font-size:var(--fs);line-height:1.7;min-height:3.4em;white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere}
 .txt.narr{color:#dcd9f5}
 .txt.sys{text-align:center;color:#ffd7e4;font-size:calc(var(--fs) - 1px);padding-top:10px}
 .txt.fade{color:#bcb7e2;font-style:italic;text-align:center;padding-top:8px}
-.next{position:absolute;right:16px;bottom:52px;font-size:13px;color:#ff9fc0;animation:bob 1s infinite}
+.next{position:absolute;right:16px;bottom:44px;font-size:13px;color:#ff9fc0;animation:bob 1s infinite}
 @keyframes bob{50%{transform:translateY(3px)}}
 .choices{display:flex;flex-direction:column;gap:8px;margin-top:4px;cursor:default}
-.cbtn{display:flex;gap:8px;align-items:flex-start;text-align:left;padding:12px 14px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);font-size:calc(var(--fs) - .5px);line-height:1.55;transition:background .15s,border-color .15s,transform .1s;animation:rise .3s both}
+.cbtn{display:flex;gap:8px;align-items:flex-start;text-align:left;padding:10px 13px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);font-size:calc(var(--fs) - .5px);line-height:1.55;transition:background .15s,border-color .15s,transform .1s;animation:rise .3s both}
 .cbtn:hover{background:#2c2f62;border-color:var(--accent)}
 .cbtn:active{transform:scale(.985)}
 .cbtn .no{flex:none;color:var(--mute);font-size:12.5px;padding-top:2px}
 .cbtn .chk{flex:none;margin-left:auto;font-size:11px;color:#7f7cab;padding-top:3px}
 .cbtn.seen{opacity:.72}
 @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.qm{display:flex;justify-content:space-between;gap:2px;margin-top:auto;padding-top:8px;border-top:1px solid #ffffff10;cursor:default}
-.qm button{flex:1;font-size:12px;color:#9a98c0;padding:8px 0;border-radius:8px}
+.qm{display:flex;justify-content:space-between;gap:2px;margin-top:auto;padding-top:4px;border-top:1px solid #ffffff10;cursor:default}
+.qm button{flex:1;font-size:12px;color:#9a98c0;padding:6px 0;border-radius:8px}
 .qm button:hover{color:#fff;background:#ffffff0d}
 .qm button.on{color:#ffb3cb;background:#ff8fb11a}
 
@@ -143,8 +145,9 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .endc .cnt{font-size:13px;color:var(--mute);margin-bottom:12px}
 .endc .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .foot{font-size:11px;color:#6f6c99;text-align:center;padding:8px 0 4px}
-@media (max-width:560px){ .stage{aspect-ratio:1.55/1} :root{--fs:16.5px} .dlg{min-height:0} }
-@media (min-width:700px){ .dlg{padding:16px 22px 10px} :root{--fs:17px} }
+.stage{transition:height .35s ease}
+@media (max-width:560px){ .stage{aspect-ratio:1.54/1} :root{--fs:16px} }
+@media (min-width:700px){ .dlg{padding:12px 22px 6px} :root{--fs:17px} }
 </style>
 </head>
 <body>
@@ -172,6 +175,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
   <section id="game" class="hidden">
     <div class="stage" id="stage">
       <div class="bgl" id="bgl"></div>
+      <img class="blur" id="cgBlur" alt="">
       <img class="cg" id="cgA" alt=""><img class="cg" id="cgB" alt="">
       <div class="vig"></div>
       <div class="pill pl" id="pPlace"></div>
@@ -1509,6 +1513,7 @@ function setCg(k){
   var a = $(flip ? "cgA" : "cgB"), b = $(flip ? "cgB" : "cgA"); flip = !flip;
   if(k){ a.src = img(k); a.style.objectPosition = (FOCUS[k] || 50) + "% 32%"; a.classList.add("on"); G.cgs[k] = 1; saveG(); } else a.classList.remove("on");
   b.classList.remove("on");
+  var bl = $("cgBlur"); if(k){ bl.src = img(k); bl.classList.add("on"); } else bl.classList.remove("on");
 }
 function setPills(){
   var meta = st.mode === "end" ? { chap:"ENDING", place:ENDS[st.scene].kind } : SC[st.scene];
@@ -1578,7 +1583,7 @@ function readKey(){ return st.scene + "|" + st.mode + "|" + st.ci + "|" + st.si 
 function showLine(l){
   var sp = l[0], text = fmt(l[1]);
   var who = $("who"), tx = $("txt");
-  $("choices").innerHTML = ""; choicesOpen = false;
+  $("choices").innerHTML = ""; choicesOpen = false; $("dlg").scrollTop = 0; $("game").classList.remove("choosing");
   tx.className = "txt";
   if(sp === "n" || sp === "#" || sp === "sys"){
     who.className = "who narr";
@@ -1621,7 +1626,7 @@ function advance(){
 
 /* ---------- 선택지 ---------- */
 function showChoices(isSub){
-  choicesOpen = true; clearTimeout(timer);
+  choicesOpen = true; clearTimeout(timer); $("game").classList.add("choosing");
   if(skip) setSkip(false);
   var list = isSub ? subsOf(curChoice()) : SC[st.scene].choices;
   var box = $("choices"); box.innerHTML = "";
@@ -1644,7 +1649,7 @@ function choose(i, isSub){
   var c = isSub ? subsOf(curChoice())[i] : SC[st.scene].choices[i];
   var key = st.scene + "|" + (isSub ? st.ci + "|" + i : i);
   G.chosen[key] = 1; saveG();
-  choicesOpen = false; $("choices").innerHTML = "";
+  choicesOpen = false; $("choices").innerHTML = ""; $("game").classList.remove("choosing");
   if(c.fx) Object.keys(c.fx).forEach(function(k){ st.pts[k] += c.fx[k]; toast(k, c.fx[k]); });
   if(c.flag) st.flags[c.flag] = true;
   if(c.hasOwnProperty("last")) st.last = c.last;
